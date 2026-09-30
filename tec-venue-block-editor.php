@@ -1,20 +1,26 @@
 <?php
-/*
-Plugin Name: Enable Block Editor for Venues
-Description: Enables the Gutenberg block editor for The Events Calendar plugin's Venues post type.
-Version: 1.0
-Author: Prolific Digital
-Author URI: https://prolificdigital.com
-License: GPL2
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain: enable-block-editor-venues
-*/
+/**
+ * Plugin Name:       Enable Block Editor for Venues
+ * Plugin URI:        https://prolificdigital.com
+ * Description:       Enables the block editor for The Events Calendar's Venues post type.
+ * Version:           1.1.0
+ * Requires at least: 6.5
+ * Requires PHP:      8.4
+ * Requires Plugins:  the-events-calendar
+ * Author:            Prolific Digital
+ * Author URI:        https://prolificdigital.com
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       tec-venue-block-editor
+ * Domain Path:       /languages
+ * Update URI:        https://api.prolificdigital.io/api/update?plugin=tec-venue-block-editor
+ *
+ * @package TECVenueBlockEditor
+ */
 
-// Exit if accessed directly
-if (! defined('ABSPATH')) {
-  exit;
-}
+defined( 'ABSPATH' ) || exit;
 
+define( 'TEC_VENUE_BLOCK_EDITOR_VERSION', '1.1.0' );
 define( 'TEC_VENUE_BLOCK_EDITOR_PLUGIN_FILE', __FILE__ );
 define( 'TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -25,6 +31,16 @@ if ( is_readable( TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR . 'vendor/autoload.php' ) ) 
 }
 
 require_once TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR . 'includes/update-checker.php';
+
+/**
+ * Load bundled translations from /languages (the header's Domain Path).
+ */
+add_action(
+	'init',
+	static function () {
+		load_plugin_textdomain( 'tec-venue-block-editor', false, dirname( plugin_basename( TEC_VENUE_BLOCK_EDITOR_PLUGIN_FILE ) ) . '/languages' );
+	}
+);
 
 /**
  * Enables the block editor for The Events Calendar plugin's Venues post type.
