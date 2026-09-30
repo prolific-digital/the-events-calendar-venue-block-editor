@@ -15,6 +15,17 @@ if (! defined('ABSPATH')) {
   exit;
 }
 
+define( 'TEC_VENUE_BLOCK_EDITOR_PLUGIN_FILE', __FILE__ );
+define( 'TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+// Composer dependencies (plugin-update-checker). Present in release zips;
+// in a git checkout run `composer install` first.
+if ( is_readable( TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+	require_once TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR . 'vendor/autoload.php';
+}
+
+require_once TEC_VENUE_BLOCK_EDITOR_PLUGIN_DIR . 'includes/update-checker.php';
+
 /**
  * Enables the block editor for The Events Calendar plugin's Venues post type.
  *
